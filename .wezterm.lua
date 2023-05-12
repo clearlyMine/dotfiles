@@ -11,8 +11,9 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+    config.default_prog = { 'pwsh.exe', '-NoLogo' }
+end
 config.color_scheme = 'Snazzy'
 config.font = wezterm.font_with_fallback {
     -- 'RobotoMono Nerd Font',
