@@ -1,4 +1,4 @@
-function nmap(l, r, opts, bufnr)
+local function nmap(l, r, opts, bufnr)
   opts = opts or {}
   opts.buffer = bufnr
   vim.keymap.set('n', l, r, opts)
