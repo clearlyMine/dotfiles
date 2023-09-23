@@ -1,10 +1,12 @@
 -- map("", "<leader><leader>ps", "<Cmd>Lazy sync<CR>", { desc = "update vim plugins" })
 local function map(mode, lhs, rhs, opts)
-  vim.keymap.set(mode, lhs, rhs, opts)
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 -- Keymaps for better default experience
 map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+map( 'i', 'jj', '<Esc>', { desc = 'Better escape' })
 
 map('', '±', '<Cmd>nohlsearch<CR>', { desc = 'turn off search highlight' })
 
@@ -24,19 +26,19 @@ map('n', '<C-u>', '<C-u>zz', { desc = 'scroll up and then center the cursorline'
 -- vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
 local wk = require 'which-key'
 wk.register {
-  ['<leader>b'] = { name = '[b]uffer' },
-  ['<leader>c'] = { name = '[c]ode' },
-  ['<leader>d'] = { name = '[d]ap' },
-  ['<leader>f'] = { name = '[f]ile manipulation' },
-  ['<leader>g'] = { name = '[g]it' },
-  ['<leader>l'] = { name = '[l]sp' },
-  ['<leader>q'] = { name = 'Session Management [q]' },
-  ['<leader>s'] = { name = '[s]earch' },
-  ['<leader>u'] = { name = '[u]I controls' },
-  ['<leader>w'] = { name = '[w]indow controls' },
-  ['<leader>x'] = { name = 'Error Lists [x]' },
-  ['<leader>z'] = { name = 'Toggle No neck pain [z]' },
-  -- ['<leader><leader>t'] = { name = 'terminal' },
+	['<leader>b'] = { name = '[b]uffer' },
+	['<leader>c'] = { name = '[c]ode' },
+	['<leader>d'] = { name = '[d]ap' },
+	['<leader>f'] = { name = '[f]ile manipulation' },
+	['<leader>g'] = { name = '[g]it' },
+	['<leader>l'] = { name = '[l]sp' },
+	['<leader>q'] = { name = 'Session Management [q]' },
+	['<leader>s'] = { name = '[s]earch' },
+	['<leader>u'] = { name = '[u]I controls' },
+	['<leader>w'] = { name = '[w]indow controls' },
+	['<leader>x'] = { name = 'Error Lists [x]' },
+	['<leader>z'] = { name = 'Toggle No neck pain [z]' },
+	-- ['<leader><leader>t'] = { name = 'terminal' },
 }
 
 -- better up/down
@@ -83,7 +85,8 @@ map({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsea
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
-map('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / clear hlsearch / diff update' })
+map('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
+	{ desc = 'Redraw / clear hlsearch / diff update' })
 
 map({ 'n', 'x' }, 'gw', '*N', { desc = 'Search word under cursor' })
 
