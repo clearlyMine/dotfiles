@@ -11,7 +11,7 @@ return {
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', event = 'LspAttach', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       {
@@ -116,6 +116,8 @@ return {
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+      require 'lspconfig'.solidity_ls_nomicfoundation.setup {}
 
       mason_lspconfig.setup_handlers {
         function(server_name)
