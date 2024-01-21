@@ -19,7 +19,6 @@ config.font = wezterm.font_with_fallback {
     -- 'RobotoMono Nerd Font',
     -- 'Fira Code',
     -- { family = 'Hack NF Mono', weight = 'Regular', italic = false, stretch = "Regular", style = "Regular" },
-    'Hack NF Mono',
     'Hack Nerd Font Mono',
     'Hack NF',
     'Hack Nerd Font',
@@ -30,12 +29,11 @@ config.font = wezterm.font_with_fallback {
     -- 'Material Design Icons Desktop',
 }
 -- config.font = wezterm.font('Hack NF Mono')
-config.font_size = 10
+config.font_size = 14;
 -- config.line_height = 1.2
 config.window_frame = {
     font = wezterm.font { family = 'RobotoMono Nerd Font', weight = 'Regular' },
 }
-config.window_decorations = "RESIZE"
 
 
 
@@ -46,6 +44,22 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
         label = 'PowerShell 7',
         args = { 'C:\\Program Files\\PowerShell\\7\\pwsh.exe', '-NoLogo' },
     })
+    config.font_size = 10
+    config.font = wezterm.font_with_fallback {
+        -- 'RobotoMono Nerd Font',
+        -- 'Fira Code',
+        -- { family = 'Hack NF Mono', weight = 'Regular', italic = false, stretch = "Regular", style = "Regular" },
+        'Hack NF Mono',
+        'Hack Nerd Font Mono',
+        'Hack NF',
+        'Hack Nerd Font',
+        'Hack',
+        'JetBrainsMono Nerd Font',
+        -- 'Cascadia Code PL',
+        -- 'Cascadia Code',
+        -- 'Material Design Icons Desktop',
+    }
+    config.window_decorations = "RESIZE"
 end
 config.launch_menu = launch_menu
 
