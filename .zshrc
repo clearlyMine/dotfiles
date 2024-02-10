@@ -139,6 +139,7 @@ export GOPATH="/mnt/d/Documents/GoWorkspace/"
 export PATH="$DENO_INSTALL/bin:$PATH:/usr/local/go/bin:$GOPATH/bin"
 
 eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
