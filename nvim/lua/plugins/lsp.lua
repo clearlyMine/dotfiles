@@ -102,6 +102,7 @@ return {
             telemetry = { enable = false },
           },
         },
+        zls = {},
       }
 
       -- This is done to make sure lazy-loading works correctly
