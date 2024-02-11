@@ -156,3 +156,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 export PATH="$HOME/.juliaup/bin:$PATH"
 
+# needed for GPG decryption of keys for git-credential-manager to connect to github
+export GPG_TTY=$(tty)
