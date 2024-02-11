@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=/home/onion/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -126,7 +126,7 @@ function nvims() {
 bindkey -s ^a "nvims\n"
 
 # pnpm
-export PNPM_HOME="/home/onion/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -134,7 +134,7 @@ esac
 # pnpm end
 
 
-export DENO_INSTALL="/home/onion/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export GOPATH="/mnt/d/Documents/GoWorkspace/"
 export PATH="$DENO_INSTALL/bin:$PATH:/usr/local/go/bin:$GOPATH/bin"
 
@@ -146,8 +146,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # bun completions
-[ -s "/home/onion/.bun/_bun" ] && source "/home/onion/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+export PATH="$HOME/.juliaup/bin:$PATH"
+
