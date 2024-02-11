@@ -158,3 +158,6 @@ export PATH="$HOME/.juliaup/bin:$PATH"
 
 # needed for GPG decryption of keys for git-credential-manager to connect to github
 export GPG_TTY=$(tty)
+
+# add bob to manage nvim versions
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
