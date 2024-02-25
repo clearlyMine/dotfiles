@@ -132,7 +132,7 @@ function _G.qfSort()
   fn.setqflist(items, 'r')
 end
 
-vim.keymap.set('', '<leader>xs', '<Cmd>lua _G.qfSort()<CR>', { desc = 'sort quickfix window' })
+vim.keymap.set('', '<leader>xss', '<Cmd>lua _G.qfSort()<CR>', { desc = 'sort quickfix window' })
 
 -- This will align the quickfix window list.
 function _G.qftf(info)
