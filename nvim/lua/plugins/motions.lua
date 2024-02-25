@@ -54,7 +54,14 @@ return {
         exclude = {}, -- tabout will ignore these filetypes
       }
     end,
-    dependencies = { 'nvim-treesitter', 'nvim-cmp' }
+    requires = {
+      'nvim-treesitter/nvim-treesitter',
+      'L3MON4D3/LuaSnip',
+      'hrsh7th/nvim-cmp',
+    },
+    opt = true, -- Set this to true if the plugin is optional
+    event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
+    priority = 1000,
   },
 
   -- MULTIPLE CURSOR SUPPORT
