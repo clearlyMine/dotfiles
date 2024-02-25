@@ -126,7 +126,7 @@ return {
         },
         sources = cmp.config.sources {
           -- ordered by priority
-          { name = 'nvim_lsp',               keyword_length = 1 },
+          { name = 'nvim_lsp', keyword_length = 1 },
           { name = 'nvim_lsp_signature_help' },
           { name = 'luasnip' },
           { name = 'path' },
@@ -157,8 +157,8 @@ return {
 
   {
     'L3MON4D3/LuaSnip',
-    version = "v2.*",
-    build = "make install_jsregexp",
+    version = 'v2.*',
+    build = 'make install_jsregexp',
     lazy = false,
     dependencies = { 'saadparwaiz1/cmp_luasnip' },
     keys = {
