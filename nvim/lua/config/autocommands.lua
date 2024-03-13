@@ -9,6 +9,11 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal textwidth=100',
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'solidity' },
+  command = 'setlocal textwidth=120',
+})
+
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.mdx' },
   command = 'set filetype=markdown',
