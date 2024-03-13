@@ -29,7 +29,7 @@ require('lazy').setup({
   {
     -- Theme
     'EdenEast/nightfox.nvim',
-    lazy = false,    -- make sure we load this during startup as it is our main colorscheme
+    lazy = false, -- make sure we load this during startup as it is our main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       vim.cmd 'colorscheme carbonfox'
@@ -69,3 +69,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Disable nvim providers
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
