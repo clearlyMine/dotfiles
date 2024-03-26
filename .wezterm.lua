@@ -11,9 +11,6 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-    config.default_prog = { 'pwsh.exe', '-NoLogo' }
-end
 config.color_scheme = 'Snazzy'
 config.font = wezterm.font_with_fallback {
     -- 'RobotoMono Nerd Font',
@@ -28,7 +25,6 @@ config.font = wezterm.font_with_fallback {
     -- 'Cascadia Code',
     -- 'Material Design Icons Desktop',
 }
--- config.font = wezterm.font('Hack NF Mono')
 config.font_size = 14;
 -- config.line_height = 1.2
 config.window_frame = {
@@ -60,6 +56,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
         -- 'Material Design Icons Desktop',
     }
     config.window_decorations = "RESIZE"
+    config.default_prog = { 'pwsh.exe', '-NoLogo' }
 end
 config.launch_menu = launch_menu
 
