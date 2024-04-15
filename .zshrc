@@ -137,10 +137,6 @@ esac
 # pnpm end
 
 
-export DENO_INSTALL="$HOME/.deno"
-export GOPATH="/mnt/d/Documents/GoWorkspace/"
-export PATH="$DENO_INSTALL/bin:$PATH:/usr/local/go/bin:$GOPATH/bin"
-
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
