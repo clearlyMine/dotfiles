@@ -73,6 +73,10 @@ ZSH_THEME="robbyrussell"
 plugins=(
     git
     zsh-autosuggestions
+    zsh-syntax-highlighting
+    F-Sy-H
+    zsh-autocomplete
+    zsh-vi-mode
     rust
     golang
     pip
@@ -108,6 +112,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ls="lsd"
 alias lt="lsd --tree"
+
+# Keys for replacing/extending functionality of plugins
+bindkey '^t' autosuggest-accept
 
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 #alias nvim-kick="NVIM_APPNAME=kickstart nvim"
