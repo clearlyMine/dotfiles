@@ -2,7 +2,7 @@ return {
   {
     -- NOTE: `:Noice` to open message history + `:Noice telescope` to open message history in Telescope.
     'folke/noice.nvim',
-    event = 'VimEnter',
+    event = 'VeryLazy',
     keys = {
       {
         '<leader>un',
@@ -16,82 +16,19 @@ return {
       },
     },
     config = function()
-      require('noice').setup {
-        views = {
-          cmdline_popup = {
-            size = { width = '40%', height = 'auto' },
-            win_options = {
-              winhighlight = {
-                Normal = 'Normal',
-                FloatBorder = 'DiagnosticSignInfo',
-                IncSearch = '',
-                Search = '',
-              },
-            },
-          },
-          popupmenu = {
-            relative = 'editor',
-            position = { row = 8, col = '50%' },
-            size = { width = 100, height = 10 },
-            border = { style = 'rounded', padding = { 0, 0.5 } },
-            win_options = {
-              winhighlight = {
-                Normal = 'Normal',
-                FloatBorder = 'DiagnosticSignInfo',
-              },
-            },
-          },
-        },
-        routes = {
-          -- skip displaying message that file was written to.
-          {
-            filter = {
-              event = 'msg_show',
-              kind = '',
-              find = 'written',
-            },
-            opts = { skip = true },
-          },
-          {
-            filter = {
-              event = 'msg_show',
-              kind = '',
-              find = 'more lines',
-            },
-            opts = { skip = true },
-          },
-          {
-            filter = {
-              event = 'msg_show',
-              kind = '',
-              find = 'fewer lines',
-            },
-            opts = { skip = true },
-          },
-          {
-            filter = {
-              event = 'msg_show',
-              kind = '',
-              find = 'lines yanked',
-            },
-            opts = { skip = true },
-          },
-          {
-            view = 'split',
-            filter = { event = 'msg_show', min_height = 10 },
-          },
-        },
-        presets = { long_message_to_split = true, lsp_doc_border = true },
-        documentation = {
-          opts = {
-            win_options = {
-              winhighlight = { FloatBorder = 'DiagnosticSignInfo' },
-            },
-          },
+      require('noice').setup { -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = false, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
         },
         lsp = {
-          progress = {
-            enabled = false, -- I already use fidget configured in ./lsp.lua
+          override = {
+            ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+            ['vim.lsp.util.stylize_markdown'] = true,
+            ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
           },
         },
       }
