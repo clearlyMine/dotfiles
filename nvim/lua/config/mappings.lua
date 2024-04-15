@@ -113,6 +113,10 @@ map('n', '<leader>K', '<cmd>norm! K<cr>', { desc = 'Keywordprg' })
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
+-- insert line without entering insert mode
+map('n', '<leader>o', 'o<esc>0"_D')
+map('n', '<leader>O', 'O<esc>0"_D')
+
 -- lazy
 map('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 
