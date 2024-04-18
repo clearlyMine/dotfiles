@@ -1,4 +1,3 @@
--- map("", "<leader><leader>ps", "<Cmd>Lazy sync<CR>", { desc = "update vim plugins" })
 local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
@@ -115,6 +114,8 @@ map('v', '>', '>gv')
 -- insert line without entering insert mode
 map('n', '<leader>o', 'o<esc>0"_D')
 map('n', '<leader>O', 'O<esc>0"_D')
+
+map('x', 'p', 'P')
 
 -- lazy
 map('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
