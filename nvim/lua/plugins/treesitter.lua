@@ -12,7 +12,23 @@ return {
       --@diagnostics disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'c', 'cpp', 'go', 'gomod', 'gosum', 'gowork', 'javascript', 'lua', 'python', 'rust', 'solidity', 'tsx', 'typescript', 'vimdoc', 'vim' },
+        ensure_installed = {
+          'c',
+          'cpp',
+          'go',
+          'gomod',
+          'gosum',
+          'gowork',
+          'javascript',
+          'lua',
+          'python',
+          'rust',
+          'solidity',
+          'tsx',
+          'typescript',
+          'vimdoc',
+          'vim',
+        },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
