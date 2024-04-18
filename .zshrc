@@ -120,6 +120,8 @@ alias lt="lsd --tree"
 # Keys for replacing/extending functionality of plugins
 bindkey '^t' autosuggest-accept
 
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 #alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"
