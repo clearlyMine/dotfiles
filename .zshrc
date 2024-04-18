@@ -85,6 +85,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Fix issues with zsh-autocomplete and zsh-vi-mode
+zvm_after_init_commands+=('[ -f $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] && source $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh')
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
