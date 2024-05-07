@@ -17,7 +17,6 @@ return {
           'impl',
           'lua-language-server',
           'prettierd',
-          'rust-analyzer',
           'tailwindcss-language-server',
           'typescript-language-server',
         },
@@ -376,6 +375,13 @@ return {
         end,
       }
     end,
+    opts = {
+      setup = {
+        rust_analyzer = function()
+          return true
+        end,
+      },
+    },
   },
 
   {
