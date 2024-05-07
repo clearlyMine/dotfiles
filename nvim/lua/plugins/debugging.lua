@@ -4,17 +4,16 @@ return {
     'mfussenegger/nvim-dap',
 
     dependencies = {
+      -- Installs the debug adapters for you
+      'jay-babu/mason-nvim-dap.nvim',
+      'nvim-neotest/nvim-nio',
+      {
+        'leoluz/nvim-dap-go',
+        config = true,
+      },
       -- Creates a beautiful debugger UI
       'rcarriga/nvim-dap-ui',
-
-      -- Installs the debug adapters for you
       'williamboman/mason.nvim',
-      'jay-babu/mason-nvim-dap.nvim',
-
-      -- Add your own debuggers here
-      -- 'leoluz/nvim-dap-go',
-      --
-      'nvim-neotest/nvim-nio',
     },
 
     config = function()
@@ -34,7 +33,7 @@ return {
         -- online, please don't ask me how to install them :)
         ensure_installed = {
           -- Update this to ensure that you have the debuggers for the langs you want
-          -- 'delve',
+          'delve',
           'codelldb',
           'cpptools',
           'rust',

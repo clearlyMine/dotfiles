@@ -18,15 +18,15 @@ return {
     opts = {
       -- Define your formatters
       formatters_by_ft = {
+        go = { 'goimports', 'gofumpt' },
+        javascript = { { 'prettierd', 'prettier' } },
         lua = { 'stylua' },
         -- python = { "isort", "black" },
-        javascript = { { 'prettierd', 'prettier' } },
-        -- solidity = { "forge fmt" },
       },
       -- Set up format-on-save
       format_on_save = function(bufnr)
         -- Disable autoformat on certain filetypes
-        local ignore_filetypes = { 'sol' }
+        local ignore_filetypes = {}
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
           return
         end

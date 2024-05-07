@@ -1,9 +1,37 @@
+local map = function(modes, keys, func, opts)
+  vim.keymap.set(modes, keys, func, opts)
+end
+
 return {
+  {
+    'WhoIsSethDaniel/mason-tool-installer',
+    config = function()
+      require('mason-tool-installer').setup {
+        ensure_installed = {
+          'codelldb',
+          'delve',
+          'eslint-lsp',
+          'gofumpt',
+          'gomodifytags',
+          'gopls',
+          'impl',
+          'lua-language-server',
+          'prettierd',
+          'rust-analyzer',
+          'tailwindcss-language-server',
+          'typescript-language-server',
+        },
+      }
+    end,
+  },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = { 'BufEnter', 'BufReadPre', 'BufNewFile', 'BufWritePre' },
+    -- event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
@@ -11,7 +39,7 @@ return {
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       {
@@ -28,9 +56,6 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
-          local map = function(modes, keys, func, opts)
-            vim.keymap.set(modes, keys, func, opts)
-          end
           local nmap = function(keys, func, desc)
             if desc then
               desc = 'LSP: ' .. desc
@@ -79,30 +104,58 @@ return {
         end,
       })
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. They will be passed to
-      --  the `settings` field of the server config. You must look up that documentation yourself.
-      --
-      --  If you want to override the default filetypes that your language server will attach to you can
-      --  define the property 'filetypes' to the map in question.
       local servers = {
         -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        rust_analyzer = {},
-        tailwindcss = {},
-        tsserver = {},
-        -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+        eslint = {},
+        gopls = {},
         lua_ls = {
-          Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
+          settings = {
+            Lua = {
+              workspace = { checkThirdParty = false },
+              telemetry = { enable = false },
+            },
           },
         },
-        zls = {},
+        -- pyright = {},
+        solidity_ls_nomicfoundation = {},
+        tailwindcss = {
+          settings = {
+            -- exclude a filetype from the default_config
+            filetypes_exclude = { 'markdown' },
+            -- add additional filetypes to the default_config
+            filetypes_include = {},
+            -- to fully override the default_config, change the below
+            -- filetypes = {}
+
+            -- setup = function(_, opts)
+            --   local tw = require 'lspconfig.server_configurations.tailwindcss'
+            --   opts.filetypes = opts.filetypes or {}
+            --
+            --   -- Add default filetypes
+            --   vim.list_extend(opts.filetypes, tw.default_config.filetypes)
+            --
+            --   -- Remove excluded filetypes
+            --   --- @param ft string
+            --   opts.filetypes = vim.tbl_filter(function(ft)
+            --     return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
+            --   end, opts.filetypes)
+            --
+            --   -- Add additional filetypes
+            --   vim.list_extend(opts.filetypes, opts.filetypes_include or {})
+            -- end,
+          },
+        },
+        tsserver = {},
+        -- zls = {},
+      }
+      local solidity_root_files = {
+        'hardhat.config.js',
+        'hardhat.config.ts',
+        'foundry.toml',
+        'remappings.txt',
+        'truffle.js',
+        'truffle-config.js',
+        'ape-config.yaml',
       }
 
       -- This is done to make sure lazy-loading works correctly
@@ -113,21 +166,283 @@ return {
 
       mason_lspconfig.setup {
         ensure_installed = vim.tbl_keys(servers),
+        automatic_installation = true,
       }
 
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
+      local lspconfig = require 'lspconfig'
       mason_lspconfig.setup_handlers {
         function(server_name)
-          require('lspconfig')[server_name].setup {
+          lspconfig[server_name].setup {
             capabilities = capabilities,
-            -- on_attach = on_attach,
-            settings = servers[server_name],
             filetypes = (servers[server_name] or {}).filetypes,
+            settings = (servers[server_name] or {}).settings,
           }
         end,
+
+        ['eslint'] = function()
+          lspconfig['eslint'].setup {
+            capabilities = capabilities,
+            on_attach = function(_, bufnr)
+              vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = bufnr,
+                command = 'EslintFixAll',
+              })
+            end,
+            settings = { workingDirectories = { mode = 'auto' } },
+          }
+        end,
+
+        ['gopls'] = function()
+          lspconfig['gopls'].setup {
+            capabilities = capabilities,
+            keys = {
+              -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
+              { '<leader>td', "<cmd>lua require('dap-go').debug_test()<CR>", desc = 'Debug Nearest (Go)' },
+            },
+            on_attach = function(client, _)
+              if not client.server_capabilities.semanticTokensProvider then
+                local semantic = client.config.capabilities.textDocument.semanticTokens
+                client.server_capabilities.semanticTokensProvider = {
+                  full = true,
+                  legend = {
+                    tokenTypes = semantic.tokenTypes,
+                    tokenModifiers = semantic.tokenModifiers,
+                  },
+                  range = true,
+                }
+              end
+            end,
+            settings = {
+              gopls = {
+                gofumpt = true,
+                codelenses = {
+                  gc_details = false,
+                  generate = true,
+                  regenerate_cgo = true,
+                  run_govulncheck = true,
+                  test = true,
+                  tidy = true,
+                  upgrade_dependency = true,
+                  vendor = true,
+                },
+                analyses = {
+                  fieldalignment = true,
+                  nilness = true,
+                  unusedparams = true,
+                  unusedwrite = true,
+                  useany = true,
+                },
+                hints = {
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  constantValues = true,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = true,
+                },
+                usePlaceholders = true,
+                completeUnimported = true,
+                staticcheck = true,
+                directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
+                semanticTokens = true,
+              },
+            },
+          }
+        end,
+
+        ['solidity_ls_nomicfoundation'] = function()
+          lspconfig['solidity_ls_nomicfoundation'].setup {
+            capabilities = capabilities,
+            cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
+            filetypes = { 'solidity' },
+            flags = {
+              debounce_text_changes = 150,
+            },
+            on_attach = function()
+              map('n', '<leader>cf', function()
+                os.execute 'forge fmt'
+              end, { desc = 'Forge fmt [c]ode [f]ormat' })
+              local formatter = function()
+                local is_v10 = vim.fn.has 'nvim-0.10'
+                if is_v10 == 0 then
+                  return
+                end
+                -- location of foundry.toml from the current buffer's path
+                local foundry = vim.fs.find('foundry.toml', {
+                  upward = true,
+                  stop = vim.uv.os_homedir(),
+                  path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+                })
+                if foundry then
+                  os.execute 'forge fmt <afile>'
+                end
+              end
+              vim.api.nvim_create_autocmd('BufWritePre', {
+                pattern = { '*.sol' },
+                callback = formatter,
+              })
+            end,
+            root_dir = function()
+              local util = require 'lspconfig.util'
+              return util.root_pattern(unpack(solidity_root_files)) or util.root_pattern('.git', 'package.json')
+            end,
+            settings = {},
+            single_file_support = true,
+          }
+        end,
+
+        ['tailwindcss'] = function()
+          lspconfig['tailwindcss'].setup {
+            capabilities = capabilities,
+            root_dir = function(...)
+              return require('lspconfig.util').root_pattern '.git'(...)
+            end,
+          }
+        end,
+
+        ['tsserver'] = function()
+          lspconfig['tsserver'].setup {
+            capabilities = capabilities,
+            filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
+            init_options = {
+              preferences = {
+                disableSuggestions = true,
+              },
+            },
+            keys = {
+              {
+                '<leader>co',
+                function()
+                  vim.lsp.buf.code_action {
+                    apply = true,
+                    context = {
+                      only = { 'source.organizeImports.ts' },
+                      diagnostics = {},
+                    },
+                  }
+                end,
+                desc = 'Organize Imports',
+              },
+              {
+                '<leader>cR',
+                function()
+                  vim.lsp.buf.code_action {
+                    apply = true,
+                    context = {
+                      only = { 'source.removeUnused.ts' },
+                      diagnostics = {},
+                    },
+                  }
+                end,
+                desc = 'Remove Unused Imports',
+              },
+            },
+            root_dir = function(...)
+              return require('lspconfig.util').root_pattern '.git'(...)
+            end,
+            ---@diagnostic disable-next-line: missing-fields
+            settings = {
+              completions = {
+                completeFunctionCalls = true,
+              },
+              -- typescript = {
+              --   inlayHints = {
+              --     includeInlayParameterNameHints = 'literal',
+              --     includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              --     includeInlayFunctionParameterTypeHints = true,
+              --     includeInlayVariableTypeHints = false,
+              --     includeInlayPropertyDeclarationTypeHints = true,
+              --     includeInlayFunctionLikeReturnTypeHints = true,
+              --     includeInlayEnumMemberValueHints = true,
+              --   },
+              -- },
+              -- javascript = {
+              --   inlayHints = {
+              --     includeInlayParameterNameHints = 'all',
+              --     includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              --     includeInlayFunctionParameterTypeHints = true,
+              --     includeInlayVariableTypeHints = true,
+              --     includeInlayPropertyDeclarationTypeHints = true,
+              --     includeInlayFunctionLikeReturnTypeHints = true,
+              --     includeInlayEnumMemberValueHints = true,
+              --   },
+              -- },
+            },
+          }
+        end,
+      }
+    end,
+  },
+
+  {
+    'nvimtools/none-ls.nvim',
+    -- event = 'VeryLazy',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    -- opts = function(_, opts)
+    opts = function()
+      -- return require "custom.configs.null-ls"
+      local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+      local nls = require 'null-ls'
+
+      -- opts.sources = vim.list_extend(opts.sources or {}, {
+      local opts = {
+        sources = {
+          -- nls.builtins.code_actions.refactoring,
+          --------------
+          -- Solidity --
+          nls.builtins.diagnostics.solhint,
+          nls.builtins.formatting.forge_fmt,
+          --------------
+          ----- Go -----
+          nls.builtins.code_actions.gomodifytags,
+          nls.builtins.code_actions.impl,
+          nls.builtins.formatting.goimports,
+          nls.builtins.formatting.gofumpt,
+          --------------
+          -- Tailwind --
+          nls.builtins.formatting.rustywind,
+          --------------
+          ----- Lua ----
+          nls.builtins.formatting.stylua,
+          --------------
+          nls.builtins.formatting.prettierd,
+        },
+        on_attach = function(client, bufnr)
+          if client.supports_method 'textDocument/formatting' then
+            vim.api.nvim_clear_autocmds {
+              group = augroup,
+              buffer = bufnr,
+            }
+            vim.api.nvim_create_autocmd('BufWritePre', {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format { bufnr = bufnr }
+              end,
+            })
+          end
+        end,
+      }
+
+      return opts
+    end,
+  },
+
+  {
+    'jay-babu/mason-null-ls.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    dependencies = {
+      'williamboman/mason.nvim',
+      'nvimtools/none-ls.nvim',
+    },
+    config = function()
+      require('mason-null-ls').setup {
+        ensure_installed = { 'goimports', 'prettierd', 'rustywind', 'stylua' },
+        automatic_installation = true,
       }
     end,
   },

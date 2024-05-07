@@ -66,6 +66,20 @@ return {
 
   {
     'hrsh7th/nvim-cmp',
+    dependencies = {
+      -- MANAGE CRATE DEPENDENCIES
+      -- {
+      'saecki/crates.nvim',
+      -- event = { 'BufRead Cargo.toml' },
+      -- config = true,
+      -- },
+    },
+    opts = function(_, _)
+      local cmp = require 'cmp'
+      local config = cmp.get_config()
+      table.insert(config.sources, { name = 'crates' })
+      cmp.setup(config)
+    end,
     config = function()
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
