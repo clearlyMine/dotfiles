@@ -39,7 +39,7 @@ return {
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       {
@@ -299,7 +299,7 @@ return {
           lspconfig['tailwindcss'].setup {
             capabilities = capabilities,
             root_dir = function(...)
-              return require('lspconfig.util').root_pattern '.git'(...)
+              return require('lspconfig.util').root_pattern '.git' (...)
             end,
           }
         end,
@@ -342,7 +342,7 @@ return {
               },
             },
             root_dir = function(...)
-              return require('lspconfig.util').root_pattern '.git'(...)
+              return require('lspconfig.util').root_pattern '.git' (...)
             end,
             ---@diagnostic disable-next-line: missing-fields
             settings = {

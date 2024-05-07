@@ -6,12 +6,12 @@ return {
     cmd = { 'TroubleToggle', 'Trouble' },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { '<leader>xc', '<Cmd>TroubleClose<CR>', desc = 'Trouble Close' },
-      { '<leader>xx', '<Cmd>TroubleToggle document_diagnostics<CR>', desc = 'Document Diagnostics (Trouble)' },
+      { '<leader>xc', '<Cmd>TroubleClose<CR>',                        desc = 'Trouble Close' },
+      { '<leader>xx', '<Cmd>TroubleToggle document_diagnostics<CR>',  desc = 'Document Diagnostics (Trouble)' },
       { '<leader>xw', '<Cmd>TroubleToggle workspace_diagnostics<CR>', desc = 'Workspace Diagnostics (Trouble)' },
-      { '<leader>xr', '<Cmd>TroubleToggle lsp_references<CR>', desc = 'LSP References (Trouble)' },
-      { '<leader>xq', '<Cmd>TroubleToggle quickfix<CR>', desc = 'Quickfix List (Trouble)' },
-      { '<leader>xl', '<Cmd>TroubleToggle loclist<CR>', desc = 'Location List (Trouble)' },
+      { '<leader>xr', '<Cmd>TroubleToggle lsp_references<CR>',        desc = 'LSP References (Trouble)' },
+      { '<leader>xq', '<Cmd>TroubleToggle quickfix<CR>',              desc = 'Quickfix List (Trouble)' },
+      { '<leader>xl', '<Cmd>TroubleToggle loclist<CR>',               desc = 'Location List (Trouble)' },
       {
         '[q',
         function()

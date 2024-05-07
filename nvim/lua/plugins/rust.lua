@@ -2,11 +2,11 @@ return {
   {
     'mrcjkb/rustaceanvim',
     version = '^4', -- Recommended
-    lazy = false, -- This plugin is already lazy
+    lazy = false,   -- This plugin is already lazy
     ft = { 'rust' },
     opts = {
       server = {
-        on_attach = function(client, bufnr)
+        on_attach = function(_, bufnr)
           -- register which-key mappings
           local wk = require 'which-key'
           wk.register({
