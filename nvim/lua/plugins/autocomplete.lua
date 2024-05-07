@@ -140,13 +140,17 @@ return {
         },
         sources = cmp.config.sources {
           -- ordered by priority
-          { name = 'nvim_lsp', keyword_length = 1 },
+          { name = 'nvim_lsp',               keyword_length = 1 },
           { name = 'nvim_lsp_signature_help' },
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'buffer' },
           { name = 'nvim_lua' },
           { name = 'crates' },
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        formatting = {
+          format = require('tailwindcss-colorizer-cmp').formatter,
         },
       }
 
