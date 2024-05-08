@@ -51,7 +51,7 @@ return {
   },
 
   -- LIBRARY USED BY OTHER PLUGINS
-  { 'nvim-lua/plenary.nvim', lazy = true },
+  { 'nvim-lua/plenary.nvim',     lazy = true },
 
   -- MAKE DOT OPERATOR WORK IN A SENSIBLE WAY
   { 'tpope/vim-repeat' },
@@ -81,14 +81,30 @@ return {
     config = function()
       require('better_escape').setup {
         mapping = { 'jj', 'jk', 'kk', 'kj' }, -- a table with mappings to use
-        timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-        clear_empty_lines = false, -- clear line after escaping if there is only whitespace
-        keys = '<Esc>', -- keys used for escaping, if it is a function will use the result everytime
+        timeout = vim.o.timeoutlen,           -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+        clear_empty_lines = false,            -- clear line after escaping if there is only whitespace
+        keys = '<Esc>',                       -- keys used for escaping, if it is a function will use the result everytime
         -- example(recommended)
         -- keys = function()
         --   return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
         -- end,
       }
     end,
+  },
+
+  -- HARDTIME
+  {
+    'm4xshen/hardtime.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+    opts = {
+      -- Add "oil" to the disabled_filetypes
+      disabled_filetypes = { 'qf', 'netrw', 'NvimTree', 'lazy', 'mason', 'oil', 'neo-tree' },
+      disabled_keys = {
+        ['<Up>'] = {},
+        ['<Down>'] = {},
+        ['<Left>'] = {},
+        ['<Right>'] = {},
+      },
+    },
   },
 }
