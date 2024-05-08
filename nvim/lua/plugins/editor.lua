@@ -80,6 +80,7 @@ return {
     -- BETTER COMMENTING
     'numToStr/Comment.nvim',
     opts = {},
+    lazy = false,
   },
 
   {

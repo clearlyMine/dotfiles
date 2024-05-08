@@ -1,6 +1,6 @@
 return {
+  -- CAMEL CASE MOTION SUPPORT
   {
-    -- CAMEL CASE MOTION SUPPORT
     'bkad/CamelCaseMotion',
     config = function()
       vim.keymap.set('', 'w', '<Plug>CamelCaseMotion_w', { silent = true })
@@ -10,8 +10,8 @@ return {
     end,
   },
 
+  -- MOVE LINES AROUND
   {
-    -- MOVE LINES AROUND
     'fedepujol/move.nvim',
     config = function()
       local opts = { noremap = true, silent = true }
@@ -63,10 +63,4 @@ return {
     event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
     priority = 1000,
   },
-
-  -- MULTIPLE CURSOR SUPPORT
-  -- {
-  --   'mg979/vim-visual-multi',
-  --   branch = 'master'
-  -- }
 }

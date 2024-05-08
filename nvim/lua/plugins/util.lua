@@ -1,6 +1,6 @@
 return {
 
-  -- measure startuptime
+  -- MEASURE STARTUPTIME
   {
     'dstein64/vim-startuptime',
     cmd = 'StartupTime',
@@ -9,18 +9,36 @@ return {
     end,
   },
 
-  -- Session management. This saves your session in the background,
+  -- SESSION MANAGEMENT.
+  -- This saves your session in the background,
   -- keeping track of open buffers, window arrangement, and more.
   -- You can restore sessions when returning through the dashboard.
   {
     'folke/persistence.nvim',
     event = 'BufReadPre',
     opts = { options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp' } },
-    -- stylua: ignore
     keys = {
-      { "<leader>qs", function() require("persistence").load() end,                desc = "Restore Session" },
-      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-      { "<leader>qd", function() require("persistence").stop() end,                desc = "Don't Save Current Session" },
+      {
+        '<leader>qs',
+        function()
+          require('persistence').load()
+        end,
+        desc = 'Restore Session',
+      },
+      {
+        '<leader>ql',
+        function()
+          require('persistence').load { last = true }
+        end,
+        desc = 'Restore Last Session',
+      },
+      {
+        '<leader>qd',
+        function()
+          require('persistence').stop()
+        end,
+        desc = "Don't Save Current Session",
+      },
     },
   },
 
@@ -33,7 +51,7 @@ return {
   },
 
   -- LIBRARY USED BY OTHER PLUGINS
-  { 'nvim-lua/plenary.nvim',     lazy = true },
+  { 'nvim-lua/plenary.nvim', lazy = true },
 
   -- MAKE DOT OPERATOR WORK IN A SENSIBLE WAY
   { 'tpope/vim-repeat' },
@@ -57,6 +75,7 @@ return {
     end,
   },
 
+  -- BETTER ESCAPE
   {
     'max397574/better-escape.nvim',
     config = function()

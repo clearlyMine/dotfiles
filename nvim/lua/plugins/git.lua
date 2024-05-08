@@ -3,6 +3,7 @@ local function nmap(l, r, opts, bufnr)
   opts.buffer = bufnr
   vim.keymap.set('n', l, r, opts)
 end
+
 return {
   'tpope/vim-fugitive',
 
