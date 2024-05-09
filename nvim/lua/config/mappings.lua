@@ -113,8 +113,8 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 -- insert line without entering insert mode
-map('n', '<leader>o', 'o<esc>0"_D')
-map('n', '<leader>O', 'O<esc>0"_D')
+map('n', '<leader>o', 'o<esc>0"_D', { desc = 'Add line below' })
+map('n', '<leader>O', 'O<esc>0"_D', { desc = 'Add line above' })
 
 map('x', 'p', 'P')
 

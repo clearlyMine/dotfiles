@@ -1,6 +1,6 @@
 return {
+  -- Highlight, edit, and navigate code
   {
-    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -98,8 +98,8 @@ return {
     end,
   },
 
+  -- SHOWS THE CONTEXT OF THE CURRENTLY VISIBLE BUFFER CONTENTS
   {
-    -- SHOWS THE CONTEXT OF THE CURRENTLY VISIBLE BUFFER CONTENTS
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = 'nvim-treesitter/nvim-treesitter',
     opts = { separator = '-' },

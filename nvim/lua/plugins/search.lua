@@ -3,8 +3,8 @@ local function nmap(lhs, rhs, opts)
 end
 
 return {
+  -- SEARCH
   {
-    -- SEARCH
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
@@ -73,7 +73,8 @@ return {
       nmap('<leader>sw', tel_built_in.grep_string, { desc = '[S]earch current [W]ord' })
 
       nmap('<leader>scta', '<Cmd>TodoTelescope<CR>', { desc = '[S]ear[C]h [T]ODOs across [A]ll files' })
-      nmap('<leader>sctc', "<Cmd>exe ':TodoQuickFix cwd=' .. fnameescape(expand('%:p'))<CR>", { desc = '[S]ear[C]h [T]ODOs in [C]urrent file' })
+      nmap('<leader>sctc', "<Cmd>exe ':TodoQuickFix cwd=' .. fnameescape(expand('%:p'))<CR>",
+        { desc = '[S]ear[C]h [T]ODOs in [C]urrent file' })
 
       nmap('<leader>se', '<Cmd>Telescope commands<CR>', { desc = '[S]earch [E]x commands' })
       nmap('<leader>sh', tel_built_in.help_tags, { desc = '[S]earch [H]elp' })
@@ -84,7 +85,8 @@ return {
       nmap('<leader>sli', '<Cmd>Telescope lsp_incoming_calls<CR>', { desc = '[S]earch [L]sp [I]ncoming calls' })
       nmap('<leader>slo', '<Cmd>Telescope lsp_outgoing_calls<CR>', { desc = '[S]earch [L]sp [O]utgoing calls' })
       nmap('<leader>slr', '<Cmd>Telescope lsp_references<CR>', { desc = '[S]earch [L]sp code [R]eference' })
-      nmap('<leader>sls', "<Cmd>lua require('telescope.builtin').lsp_document_symbols({show_line = true})<CR>", { desc = '[S]earch [L][S]p document tree' })
+      nmap('<leader>sls', "<Cmd>lua require('telescope.builtin').lsp_document_symbols({show_line = true})<CR>",
+        { desc = '[S]earch [L][S]p document tree' })
 
       nmap('<leader>sm', '<Cmd>Telescope heading<CR>', { desc = '[S]earch [M]arkdown headings' })
       nmap('<leader>sr', '<Cmd>Telescope current_buffer_fuzzy_find<CR>', { desc = '[S]earch cu[R]rent buffer text' })
@@ -96,69 +98,47 @@ return {
     end,
   },
 
+  -- FZF SORTER FOR TELESCOPE WRITTEN IN C
   {
-    -- FZF SORTER FOR TELESCOPE WRITTEN IN C
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'make',
   },
 
+  -- USE TELESCOPE FOR UI ELEMENTS
   {
-    -- USE TELESCOPE FOR UI ELEMENTS
     'nvim-telescope/telescope-ui-select.nvim',
     config = function()
       require('telescope').setup {}
     end,
   },
 
+  -- SEARCH WINDOWS IN TELESCOPE
   {
-    -- SEARCH WINDOWS IN TELESCOPE
     'kyoh86/telescope-windows.nvim',
   },
 
+  -- SEARCH MARKDOWN HEADINGS IN TELESCOPE
   {
-    -- SEARCH MARKDOWN HEADINGS IN TELESCOPE
     'crispgm/telescope-heading.nvim',
   },
 
+  -- SEARCH EMOJIS IN TELESCOPE
   {
-    -- SEARCH EMOJIS IN TELESCOPE
     'xiyaowong/telescope-emoji.nvim',
   },
 
+  -- SEARCH CHANGED GIT FILES IN TELESCOPE
   {
-    -- SEARCH CHANGED GIT FILES IN TELESCOPE
     'axkirillov/telescope-changed-files',
   },
 
+  -- SEARCH TABS IN TELESCOPE
   {
-    -- SEARCH TABS IN TELESCOPE
     'LukasPietzschmann/telescope-tabs',
     config = function()
       nmap('<leader>t', "<Cmd>lua require('telescope-tabs').list_tabs()<CR>", { desc = 'search tabs' })
     end,
   },
-
-  -- {
-  --   -- SEARCH INDEXER
-  --   'kevinhwang91/nvim-hlslens',
-  --   config = true,
-  -- },
-  --
-  -- {
-  --   -- IMPROVES ASTERISK BEHAVIOR
-  --   'haya14busa/vim-asterisk',
-  --   config = function()
-  --     nmap('*', [[<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --     nmap('#', [[<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --     nmap('g*', [[<Plug>(asterisk-gz*)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --     nmap('g#', [[<Plug>(asterisk-gz#)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --
-  --     vim.keymap.set('x', '*', [[<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --     vim.keymap.set('x', '#', [[<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --     vim.keymap.set('x', 'g*', [[<Plug>(asterisk-gz*)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --     vim.keymap.set('x', 'g#', [[<Plug>(asterisk-gz#)<Cmd>lua require('hlslens').start()<CR>]], {})
-  --   end,
-  -- },
 
   -- {
   --   -- SEARCH AND REPLACE

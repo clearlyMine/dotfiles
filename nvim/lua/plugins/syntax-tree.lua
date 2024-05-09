@@ -1,6 +1,6 @@
 return {
+  -- DOCUMENT/CODE SYNTAX TREE
   {
-    -- DOCUMENT/CODE SYNTAX TREE
     'simrat39/symbols-outline.nvim',
     config = function()
       vim.keymap.set('n', '<leader>S', '<cmd>SymbolsOutline<cr>')
@@ -14,8 +14,8 @@ return {
     end,
   },
 
+  -- MINIMAP
   {
-    -- MINIMAP
     'gorbit99/codewindow.nvim',
     config = function()
       require('codewindow').setup {

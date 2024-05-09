@@ -1,6 +1,6 @@
 return {
+  -- windows.nvim is more like the traditional <Ctrl-w>_ and <Ctrl-w>|
   {
-    -- windows.nvim is more like the traditional <Ctrl-w>_ and <Ctrl-w>|
     'anuvyklack/windows.nvim',
     dependencies = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
     config = function()

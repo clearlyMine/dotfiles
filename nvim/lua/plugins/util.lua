@@ -1,5 +1,4 @@
 return {
-
   -- MEASURE STARTUPTIME
   {
     'dstein64/vim-startuptime',
