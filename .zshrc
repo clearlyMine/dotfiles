@@ -110,7 +110,6 @@ zvm_after_init_commands+=('[ -f $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocom
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
 alias vim="nvim"
 alias zshconfig="nvim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -122,6 +121,7 @@ bindkey '^t' autosuggest-accept
 
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 
+## Neovim
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 #alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"
