@@ -98,4 +98,16 @@ return {
     'petertriho/nvim-scrollbar',
     config = true,
   },
+
+  {
+    'HiPhish/rainbow-delimiters.nvim',
+  },
+
+  -- HIGHLIGHT UNDO AND REDO
+  {
+    'tzachar/highlight-undo.nvim',
+    opts = {
+      ...,
+    },
+  },
 }
