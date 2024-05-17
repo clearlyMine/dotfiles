@@ -52,7 +52,9 @@ config.initial_rows = 45
 config.initial_cols = 180
 -- config.enable_tab_bar = false
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.window_close_confirmation = "AlwaysPrompt"
 config.max_fps = 120
+
 config.window_padding = {
 	left = "0",
 	right = "0",
