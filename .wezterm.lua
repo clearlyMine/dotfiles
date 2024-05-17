@@ -4,6 +4,44 @@ local wezterm = require("wezterm")
 -- This table will hold the configuration.
 local config = {}
 
+local tab_colors = {
+	"Navy",
+	"Red",
+	"Green",
+	"Olive",
+	"Maroon",
+	"Purple",
+	"Teal",
+	"Lime",
+	"Yellow",
+	"Blue",
+	"Fuchsia",
+	"Aqua",
+}
+local tab_bg = "rgba(22,22,22,0)"
+wezterm.on("format-tab-title", function(tab)
+	if tab.is_active then
+		local accent = tab_colors[(tab.tab_index % #tab_colors) + 1]
+		return wezterm.format({
+			{ Background = { Color = tab_bg } },
+			{ Foreground = { AnsiColor = accent } },
+			{ Text = " " .. wezterm.nerdfonts.ple_left_half_circle_thick },
+			{ Background = { AnsiColor = accent } },
+			{ Foreground = { Color = tab_bg } },
+			{ Text = tostring(tab.tab_index) .. ". " .. tab.active_pane.title },
+			{ Background = { Color = tab_bg } },
+			{ Foreground = { AnsiColor = accent } },
+			{ Text = wezterm.nerdfonts.ple_right_half_circle_thick },
+		})
+	else
+		return wezterm.format({
+			{ Background = { Color = tab_bg } },
+			{ Foreground = { AnsiColor = "White" } },
+			--padding to make sure this takes the same space as the active tab
+			{ Text = "  " .. tostring(tab.tab_index) .. ". " .. tab.active_pane.title .. " " },
+		})
+	end
+end)
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
@@ -26,7 +64,7 @@ config.window_padding = {
 	bottom = "0cell",
 }
 
-config.use_fancy_tab_bar = true
+config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = true
 
@@ -47,58 +85,69 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 14
 -- config.line_height = 1.2
 config.window_frame = {
-	font = wezterm.font({ family = "RobotoMono Nerd Font", weight = "Regular" }),
+	font = wezterm.font({ family = "Hack Nerd Font Mono", weight = "Light" }),
 	font_size = 8,
 	-- The overall background color of the tab bar when
 	-- the window is focused
-	active_titlebar_bg = "#161616",
-	-- The overall background color of the tab bar when
+	-- active_titlebar_bg = "rgba(0,0,0,0)", -- The overall background color of the tab bar when
 	-- the window is not focused
-	inactive_titlebar_bg = "#353535",
+	-- inactive_titlebar_bg = "rgba(0,0,0,0)",
 }
 
 -- Color scheme
 config.color_scheme = "Snazzy"
+config.inactive_pane_hsb = {
+	saturation = 0,
+	brightness = 0,
+}
+config.tab_max_width = 32
 config.colors = {
 	background = "161616",
 	tab_bar = {
-		background = "#161616",
-		inactive_tab_edge = "#161616",
+		background = "rgba(0,0,0,0)",
+		-- active_tab = { bg_color = tab_bg, fg_color = "#f4f4f4" },
+		-- inactive_tab = { bg_color = tab_bg, fg_color = "#f4f4f4" },
+		-- inactive_tab_hover = { bg_color = tab_bg, fg_color = "#f4f4f4", italic = false },
+		-- inactive_tab_edge = "rgba(0,0,0,0)",
 		-- The active tab is the one that has focus in the window
-		active_tab = {
-			-- The color of the background area for the tab
-			bg_color = "#161616",
-			-- The color of the text for the tab
-			fg_color = "#c0c0c0",
-
-			-- Specify whether you want "Half", "Normal" or "Bold" intensity for the
-			-- label shown for this tab.
-			-- The default is "Normal"
-			intensity = "Normal",
-
-			-- Specify whether you want "None", "Single" or "Double" underline for
-			-- label shown for this tab.
-			-- The default is "None"
-			underline = "None",
-
-			-- Specify whether you want the text to be italic (true) or not (false)
-			-- for this tab.  The default is false.
-			italic = false,
-
-			-- Specify whether you want the text to be rendered with strikethrough (true)
-			-- or not for this tab.  The default is false.
-			strikethrough = false,
-		},
-
-		-- Inactive tabs are the tabs that do not have focus
-		inactive_tab = {
-			bg_color = "#353535",
-			fg_color = "#808080",
-
-			-- The same options that were listed under the `active_tab` section above
-			-- can also be used for `inactive_tab`.
-		},
+		-- 	active_tab = {
+		-- 		-- The color of the background area for the tab
+		-- 		-- bg_color = "rbga(0,0,0,0)",
+		-- 		bg_color = "#353535",
+		-- 		-- The color of the text for the tab
+		-- 		fg_color = "#fff",
+		--
+		-- 		-- Specify whether you want "Half", "Normal" or "Bold" intensity for the
+		-- 		-- label shown for this tab.
+		-- 		-- The default is "Normal"
+		-- 		intensity = "Normal",
+		--
+		-- 		-- Specify whether you want "None", "Single" or "Double" underline for
+		-- 		-- label shown for this tab.
+		-- 		-- The default is "None"
+		-- 		underline = "Double",
+		--
+		-- 		-- Specify whether you want the text to be italic (true) or not (false)
+		-- 		-- for this tab.  The default is false.
+		-- 		italic = true,
+		--
+		-- 		-- Specify whether you want the text to be rendered with strikethrough (true)
+		-- 		-- or not for this tab.  The default is false.
+		-- 		strikethrough = false,
+		-- 	},
+		--
+		-- 	-- Inactive tabs are the tabs that do not have focus
+		-- 	inactive_tab = {
+		-- 		bg_color = "#161616",
+		-- 		fg_color = "#808080",
+		--
+		-- 		-- The same options that were listed under the `active_tab` section above
+		-- 		-- can also be used for `inactive_tab`.
+		-- 	},
 	},
+config.tab_bar_style = {
+	new_tab = "",
+	new_tab_hover = "",
 }
 
 local act = wezterm.action
