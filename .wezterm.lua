@@ -42,8 +42,7 @@ wezterm.on("format-tab-title", function(tab)
 		})
 	end
 end)
--- In newer versions of wezterm, use the config_builder which will
--- help provide clearer error messages
+
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -67,28 +66,17 @@ config.tab_bar_at_bottom = true
 
 -- Font
 config.font = wezterm.font_with_fallback({
-	-- 'RobotoMono Nerd Font',
-	-- 'Fira Code',
-	-- { family = 'Hack NF Mono', weight = 'Regular', italic = false, stretch = "Regular", style = "Regular" },
 	"Hack Nerd Font Mono",
 	"Hack NF",
 	"Hack Nerd Font",
 	"Hack",
 	"JetBrainsMono Nerd Font",
-	-- 'Cascadia Code PL',
-	-- 'Cascadia Code',
-	-- 'Material Design Icons Desktop',
 })
 config.font_size = 14
 -- config.line_height = 1.2
 config.window_frame = {
 	font = wezterm.font({ family = "Hack Nerd Font Mono", weight = "Light" }),
 	font_size = 8,
-	-- The overall background color of the tab bar when
-	-- the window is focused
-	-- active_titlebar_bg = "rgba(0,0,0,0)", -- The overall background color of the tab bar when
-	-- the window is not focused
-	-- inactive_titlebar_bg = "rgba(0,0,0,0)",
 }
 
 -- Color scheme
