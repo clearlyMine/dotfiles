@@ -52,16 +52,13 @@ end
 config.initial_rows = 45
 config.initial_cols = 180
 -- config.enable_tab_bar = false
-config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.99
-config.max_fps = 144
--- config.animation_fps = 60
-config.cursor_blink_rate = 250
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.max_fps = 120
 config.window_padding = {
-	left = "0.25cell",
-	right = "0.25cell",
-	top = "0.25cell",
-	bottom = "0cell",
+	left = "0",
+	right = "0",
+	top = "0",
+	bottom = "0",
 }
 
 config.use_fancy_tab_bar = false
@@ -213,8 +210,9 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 		-- 'Cascadia Code',
 		-- 'Material Design Icons Desktop',
 	})
-	config.window_decorations = "RESIZE"
 	config.default_domain = "WSL:Ubuntu-22.04"
+	config.window_background_image = "c:/users/onion/terminal_background.png"
+	config.window_background_opacity = 1
 end
 config.launch_menu = launch_menu
 
