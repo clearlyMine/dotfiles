@@ -132,6 +132,14 @@ config.colors = {
 		-- 		-- can also be used for `inactive_tab`.
 		-- 	},
 	},
+	cursor_bg = "#f2f4f8",
+	cursor_border = "#f2f4f8",
+	cursor_fg = "#161616",
+	compose_cursor = "#3ddbd9",
+	selection_bg = "#2a2a2a",
+	selection_fg = "#f2f4f8",
+}
+
 config.tab_bar_style = {
 	new_tab = "",
 	new_tab_hover = "",
