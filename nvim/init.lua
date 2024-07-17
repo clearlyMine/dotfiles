@@ -29,13 +29,32 @@ require('lazy').setup({
   {
     -- Theme
     'EdenEast/nightfox.nvim',
-    lazy = false,    -- make sure we load this during startup as it is our main colorscheme
+    lazy = false, -- make sure we load this during startup as it is our main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
+      require('nightfox').setup {
+        options = {
+          styles = { strings = 'italic' },
+        },
+        palettes = {
+          carbonfox = {
+            bg3 = '#121820',
+          },
+        },
+        specs = {
+          -- all = { syntax = { operator = 'orange' } },
+        },
+        groups = {
+          all = {
+            -- ['@field'] = { fg = 'palette.yellow' },
+            -- LineNr = { fg = 'palette.red' },
+          },
+        },
+      }
       vim.cmd 'colorscheme carbonfox'
     end,
   },
-
+  'xiyaowong/transparent.nvim',
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
@@ -50,7 +69,6 @@ require('lazy').setup({
   { import = 'plugins' },
   { import = 'plugins/ui' },
 }, {})
-
 require 'config.init'
 require 'config.autocommands'
 require 'config.mappings'

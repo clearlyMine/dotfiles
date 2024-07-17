@@ -21,12 +21,12 @@ return {
   {
     'roobert/tailwindcss-colorizer-cmp.nvim',
     -- optionally, override the default options:
-    -- config = function()
-    --   require('tailwindcss-colorizer-cmp').setup {
-    --     color_square_width = 2,
-    --   }
-    -- end,
-    config = true,
+    config = function()
+      require('tailwindcss-colorizer-cmp').setup {
+        color_square_width = 2,
+      }
+    end,
+    -- config = true,
   },
 
   -- Tailwind CSS Values
@@ -44,5 +44,13 @@ return {
         copy = '<C-y>', -- Normal mode keymap to copy the CSS values between {}
       },
     },
+  },
+
+  -- Colors
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end,
   },
 }
