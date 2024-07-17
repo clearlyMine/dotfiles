@@ -9,7 +9,7 @@ return {
         on_attach = function(_, bufnr)
           -- register which-key mappings
           local wk = require 'which-key'
-          wk.register({
+          wk.add({
             ['K'] = {
               function()
                 vim.cmd.RustLsp { 'hover', 'actions' }

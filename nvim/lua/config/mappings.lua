@@ -24,20 +24,20 @@ map('n', '<C-u>', '<C-u>zz', { desc = 'scroll up and then center the cursorline'
 --
 -- vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
 local wk = require 'which-key'
-wk.register {
-	['<leader>b'] = { name = '[b]uffer' },
-	['<leader>c'] = { name = '[c]ode' },
-	['<leader>d'] = { name = '[d]ap' },
-	['<leader>f'] = { name = '[f]ile manipulation' },
-	['<leader>g'] = { name = '[g]it' },
-	['<leader>l'] = { name = '[l]sp' },
-	['<leader>q'] = { name = 'Session Management [q]' },
-	['<leader>s'] = { name = '[s]earch' },
-	['<leader>u'] = { name = '[u]I controls' },
-	['<leader>w'] = { name = '[w]indow controls' },
-	['<leader>x'] = { name = 'Error Lists [x]' },
-	['<leader>z'] = { name = 'Toggle No neck pain [z]' },
-	-- ['<leader><leader>t'] = { name = 'terminal' },
+wk.add {
+	{ '<leader>b', group = '[b]uffer' },
+	{ '<leader>c', group = '[c]ode' },
+	{ '<leader>d', group = '[d]ap' },
+	{ '<leader>f', group = '[f]ile manipulation' },
+	{ '<leader>g', group = '[g]it' },
+	{ '<leader>l', group = '[l]sp' },
+	{ '<leader>q', group = 'Session Management [q]' },
+	{ '<leader>s', group = '[s]earch' },
+	{ '<leader>u', group = '[u]I controls' },
+	{ '<leader>w', group = '[w]indow controls' },
+	{ '<leader>x', group = 'Error Lists [x]' },
+	{ '<leader>z', group = 'Toggle No neck pain [z]' },
+	-- ['<leader><leader>t', group = 'terminal' },
 }
 
 -- better up/down
