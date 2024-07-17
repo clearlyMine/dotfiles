@@ -1,19 +1,4 @@
 return {
-  -- DOCUMENT/CODE SYNTAX TREE
-  {
-    'simrat39/symbols-outline.nvim',
-    config = function()
-      vim.keymap.set('n', '<leader>S', '<cmd>SymbolsOutline<cr>')
-      require('symbols-outline').setup {
-        -- autofold_depth = 1, -- h: close, l: open, W: close all, E: open all
-        auto_close = false,
-        highlight_hovered_item = true,
-        position = 'right',
-        width = 15,
-      }
-    end,
-  },
-
   -- MINIMAP
   {
     'gorbit99/codewindow.nvim',

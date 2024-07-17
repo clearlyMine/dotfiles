@@ -72,7 +72,6 @@
   "rustaceanvim": { "branch": "master", "commit": "2eb8776df1aab03f514b38ddc39af57efbd8970b" },
   "smartcolumn.nvim": { "branch": "main", "commit": "cefb17be095ad5526030a21bb2a80553cae09127" },
   "surround-ui.nvim": { "branch": "main", "commit": "65c25088e8dbd1e098245de007498b93c694afb0" },
-  "symbols-outline.nvim": { "branch": "master", "commit": "564ee65dfc9024bdde73a6621820866987cbb256" },
   "tabout.nvim": { "branch": "master", "commit": "26cf934f872e2fbfab55d572c5eb7dad0e82238e" },
   "tailwindcss-colorizer-cmp.nvim": { "branch": "main", "commit": "3d3cd95e4a4135c250faf83dd5ed61b8e5502b86" },
   "telescope-changed-files": { "branch": "main", "commit": "0ccf50680abba21127c46c477f4646f2c5589767" },
