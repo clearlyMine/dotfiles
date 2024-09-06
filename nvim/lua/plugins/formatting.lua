@@ -19,7 +19,7 @@ return {
       -- Define your formatters
       formatters_by_ft = {
         go = { 'goimports', 'gofumpt' },
-        javascript = { { 'prettierd', 'prettier' } },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
         lua = { 'stylua' },
         solidity = { 'forge_fmt' },
         -- python = { "isort", "black" },
