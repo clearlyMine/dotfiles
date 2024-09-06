@@ -102,7 +102,7 @@ return {
 
       local servers = {
         -- clangd = {},
-        eslint = {},
+        eslint = { { filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' } } },
         gopls = {},
         lua_ls = {
           settings = {
@@ -363,9 +363,6 @@ return {
           --------------
           -- Tailwind --
           nls.builtins.formatting.rustywind,
-          --------------
-          ----- Lua ----
-          nls.builtins.formatting.stylua,
           --------------
           nls.builtins.formatting.prettierd,
         },
