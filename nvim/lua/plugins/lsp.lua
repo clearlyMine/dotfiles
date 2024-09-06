@@ -24,13 +24,10 @@ return {
     end,
   },
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     event = { 'BufEnter', 'BufReadPre', 'BufNewFile', 'BufWritePre' },
-    -- event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
@@ -326,28 +323,6 @@ return {
               completions = {
                 completeFunctionCalls = true,
               },
-              -- typescript = {
-              --   inlayHints = {
-              --     includeInlayParameterNameHints = 'literal',
-              --     includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              --     includeInlayFunctionParameterTypeHints = true,
-              --     includeInlayVariableTypeHints = false,
-              --     includeInlayPropertyDeclarationTypeHints = true,
-              --     includeInlayFunctionLikeReturnTypeHints = true,
-              --     includeInlayEnumMemberValueHints = true,
-              --   },
-              -- },
-              -- javascript = {
-              --   inlayHints = {
-              --     includeInlayParameterNameHints = 'all',
-              --     includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              --     includeInlayFunctionParameterTypeHints = true,
-              --     includeInlayVariableTypeHints = true,
-              --     includeInlayPropertyDeclarationTypeHints = true,
-              --     includeInlayFunctionLikeReturnTypeHints = true,
-              --     includeInlayEnumMemberValueHints = true,
-              --   },
-              -- },
             },
           }
         end,

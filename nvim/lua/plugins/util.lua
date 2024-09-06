@@ -58,22 +58,6 @@ return {
   -- ADD PROMISE AND ASYNC TO LUA
   { 'kevinhwang91/promise-async' },
 
-  -- USAGE TRACKER
-  -- {
-  --   'gaborvecsei/usage-tracker.nvim',
-  --   config = function()
-  --     require('usage-tracker').setup {
-  --       keep_eventlog_days = 365,
-  --       cleanup_freq_days = 365,
-  --       event_wait_period_in_sec = 5,
-  --       inactivity_threshold_in_min = 5,
-  --       inactivity_check_freq_in_sec = 5,
-  --       verbose = 0,
-  --       telemetry_endpoint = '', -- you'll need to start the restapi for this feature
-  --     }
-  --   end,
-  -- },
-
   -- BETTER ESCAPE
   {
     'max397574/better-escape.nvim',
