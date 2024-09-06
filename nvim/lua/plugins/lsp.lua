@@ -294,25 +294,12 @@ return {
                   vim.lsp.buf.code_action {
                     apply = true,
                     context = {
-                      only = { 'source.organizeImports.ts' },
+                      only = { 'source.organizeImports' },
                       diagnostics = {},
                     },
                   }
                 end,
                 desc = 'Organize Imports',
-              },
-              {
-                '<leader>cR',
-                function()
-                  vim.lsp.buf.code_action {
-                    apply = true,
-                    context = {
-                      only = { 'source.removeUnused.ts' },
-                      diagnostics = {},
-                    },
-                  }
-                end,
-                desc = 'Remove Unused Imports',
               },
             },
             root_dir = function(...)
