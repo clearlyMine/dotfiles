@@ -21,6 +21,7 @@ return {
         go = { 'goimports', 'gofumpt' },
         javascript = { { 'prettierd', 'prettier' } },
         lua = { 'stylua' },
+        solidity = { 'forge_fmt' },
         -- python = { "isort", "black" },
       },
       -- Set up format-on-save

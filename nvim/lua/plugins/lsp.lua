@@ -263,30 +263,6 @@ return {
             flags = {
               debounce_text_changes = 150,
             },
-            on_attach = function()
-              map('n', '<leader>cf', function()
-                os.execute 'forge fmt'
-              end, { desc = 'Forge fmt [c]ode [f]ormat' })
-              local formatter = function()
-                local is_v10 = vim.fn.has 'nvim-0.10'
-                if is_v10 == 0 then
-                  return
-                end
-                -- location of foundry.toml from the current buffer's path
-                local foundry = vim.fs.find('foundry.toml', {
-                  upward = true,
-                  stop = vim.uv.os_homedir(),
-                  path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
-                })
-                if foundry then
-                  os.execute 'forge fmt <afile>'
-                end
-              end
-              vim.api.nvim_create_autocmd('BufWritePre', {
-                pattern = { '*.sol' },
-                callback = formatter,
-              })
-            end,
             root_dir = function()
               local util = require 'lspconfig.util'
               return util.root_pattern(unpack(solidity_root_files)) or util.root_pattern('.git', 'package.json')
@@ -403,7 +379,6 @@ return {
           --------------
           -- Solidity --
           nls.builtins.diagnostics.solhint,
-          nls.builtins.formatting.forge_fmt,
           --------------
           ----- Go -----
           nls.builtins.code_actions.gomodifytags,
