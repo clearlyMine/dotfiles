@@ -306,7 +306,7 @@ return {
         end,
 
         ['tsserver'] = function()
-          lspconfig['tsserver'].setup {
+          lspconfig['ts_ls'].setup {
             capabilities = capabilities,
             filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
             init_options = {
