@@ -47,7 +47,7 @@ return {
               'Rust: Open Cargo.toml',
             },
           }, { mode = 'n', buffer = bufnr })
-          wk.register({
+          wk.add({
             ['K'] = {
               function()
                 vim.cmd.RustLsp { 'hover', 'range' }
