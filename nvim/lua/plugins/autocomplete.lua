@@ -101,7 +101,7 @@ return {
     version = 'v2.*',
     build = 'make install_jsregexp',
     lazy = false,
-    dependencies = { 'saadparwaiz1/cmp_luasnip' },
+    dependencies = { "rafamadriz/friendly-snippets", },
     keys = {
       {
         '<C-;>',
@@ -125,7 +125,7 @@ return {
       },
     },
     config = function()
-      require('luasnip.loaders.from_lua').load { paths = '~/.snippets' }
+      require("luasnip.loaders.from_vscode").lazy_load()
     end,
   },
 
