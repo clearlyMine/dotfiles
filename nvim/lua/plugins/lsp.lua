@@ -35,7 +35,7 @@ return {
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       {
@@ -141,7 +141,7 @@ return {
             -- end,
           },
         },
-        tsserver = {},
+        ts_ls = {},
         -- zls = {},
       }
       local solidity_root_files = {
@@ -193,7 +193,7 @@ return {
 
         ['gopls'] = function()
           lspconfig['gopls'].setup {
-            cmd_env = {GOFUMPT_SPLIT_LONG_LINES="on"},
+            cmd_env = { GOFUMPT_SPLIT_LONG_LINES = "on" },
             capabilities = capabilities,
             keys = {
               -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
@@ -274,12 +274,12 @@ return {
           lspconfig['tailwindcss'].setup {
             capabilities = capabilities,
             root_dir = function(...)
-              return require('lspconfig.util').root_pattern '.git'(...)
+              return require('lspconfig.util').root_pattern '.git' (...)
             end,
           }
         end,
 
-        ['tsserver'] = function()
+        ['ts_ls'] = function()
           lspconfig['ts_ls'].setup {
             capabilities = capabilities,
             filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
@@ -304,7 +304,7 @@ return {
               },
             },
             root_dir = function(...)
-              return require('lspconfig.util').root_pattern '.git'(...)
+              return require('lspconfig.util').root_pattern '.git' (...)
             end,
             ---@diagnostic disable-next-line: missing-fields
             settings = {
