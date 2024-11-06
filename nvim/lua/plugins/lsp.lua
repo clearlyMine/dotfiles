@@ -193,6 +193,7 @@ return {
 
         ['gopls'] = function()
           lspconfig['gopls'].setup {
+            cmd_env = {GOFUMPT_SPLIT_LONG_LINES="on"},
             capabilities = capabilities,
             keys = {
               -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
@@ -343,10 +344,10 @@ return {
           nls.builtins.diagnostics.solhint,
           --------------
           ----- Go -----
-          nls.builtins.code_actions.gomodifytags,
-          nls.builtins.code_actions.impl,
-          nls.builtins.formatting.goimports,
-          nls.builtins.formatting.gofumpt,
+          -- nls.builtins.code_actions.gomodifytags,
+          -- nls.builtins.code_actions.impl,
+          -- nls.builtins.formatting.goimports,
+          -- nls.builtins.formatting.gofumpt,
           --------------
           -- Tailwind --
           nls.builtins.formatting.rustywind,
